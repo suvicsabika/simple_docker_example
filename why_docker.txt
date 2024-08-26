@@ -1,0 +1,74 @@
+Problem Statement: You need to run a Python script on your machine that
+ requires direct access to the operating system. To achieve this, you want to 
+ utilize an Ubuntu environment on your system.
+
+Considerations: Before deciding on the appropriate approach, consider the following 
+ questions:
+
+ * Resource Usage: How large is the script, and how frequently will it be executed?
+ * Compatibility: Does the script require a specific version of Ubuntu and Python, 
+   or will it work with any Ubuntu-based distribution and any Python version?
+
+There are two ways:
+
+ 1. Using VirtualBox to Run an Ubuntu Virtual Machine
+ 2. Using Docker Desktop to Run an Ubuntu Container
+
+-------------------------------------------------------------------------------------------------------------------
+
+1. Using VirtualBox to Run an Ubuntu Virtual Machine
+    Pros:
+
+         * Complete OS Access: VirtualBox allows you to run a full Ubuntu operating system,
+           providing comprehensive access to all system features and functionalities.
+         * Strong Isolation: The virtual machine operates independently of your Windows host 
+           system, enhancing security and minimizing potential conflicts.
+         * Graphical User Interface Support: You can seamlessly use Ubuntu’s GUI within the 
+           virtual machine, making it suitable for applications that require a desktop environment.
+    Cons:
+
+        * High Resource Consumption: Running a full operating system within a virtual machine
+          consumes substantial system resources, including CPU, memory, and disk space.
+        * Complex Setup: Setting up and managing a virtual machine can be more intricate 
+          and time-consuming compared to other methods.
+        * Performance Overhead: Virtualization introduces additional performance overhead 
+          due to resource allocation for both host and guest operating systems.
+
+2. Using Docker Desktop to Run an Ubuntu Container
+    Pros:
+
+        * Lightweight Solution: Docker containers are significantly lighter on system 
+          resources since they share the host OS kernel, making them efficient and fast.
+        * Quick and Easy Setup: Containers can be set up, started, stopped, and managed
+          rapidly, streamlining the development and deployment process.
+        * High Portability: Docker images are easily shareable and can run consistently
+          across different environments with Docker installed.
+    Cons:
+
+        * Limited OS Access: Containers do not provide the same level of system access
+          as a full virtual machine; they are isolated and share the host’s kernel, which
+          may restrict certain operations.
+        * Reduced Isolation Compared to VMs: While containers offer isolation, they are
+          not as segregated from the host system as virtual machines, which could raise 
+          security concerns in specific scenarios.
+        * Lack of Native GUI Support: Running applications that require a graphical user 
+          interface within a Docker container is more complex and often necessitates 
+          additional configuration.
+
+!!Important Note!!: In many cases, it is unnecessary to run a full Ubuntu environment to 
+execute a Python script. You can simply containerize the Python script itself using Docker, 
+granting it the necessary system access permissions. This approach offers several advantages:
+
+    * Efficiency: Containerizing only the script reduces resource usage and simplifies the 
+      deployment process.
+    * Simplicity: Managing and maintaining a single containerized application is more 
+      straightforward than handling an entire OS environment.
+    * Scalability: This method allows for easy scaling and integration with other services 
+      and applications.
+
+To easly containerize something, you only need the following:
+ * Docker Desktop (in the real world, you wouldn't use Docker Desktop, just the Docker)
+ * The "something", like a Python script, webapps, microservices, Fluentd process, etc...
+ * A Dockerfile. (In a more complex scenario even a `docker-compose.yml` too)
+
+For implementation details, refer to the provided `example_log_generator_script.py` and `Dockerfile`.
